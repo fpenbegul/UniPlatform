@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -21,13 +22,22 @@ namespace UniPlatform.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("server=.; database=UniPlatformDb; uid=sa; pwd=123", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Ilanlar> Ilanlar { get; set; }
+        public DbSet<Duyurular> Duyurular { get; set; }
+
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
