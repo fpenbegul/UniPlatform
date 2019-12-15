@@ -4,9 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ASP.NET Uygulamam</title>
+    <title>@ViewBag.Title - UniPlatform</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -25,7 +28,7 @@
                 {
                     // bu ekle butonlarını sadece user rolündeki kullanıcılar görebilir
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Duyuru Ekle", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Duyuru Ekle", "DuyuruEkle", "Duyuru")</li>
                         <li>@Html.ActionLink("İlan Ekle", "About", "Home")</li>
                         <li>@Html.ActionLink("Soru-Cevap Ekle", "Contact", "Home")</li>
                     </ul>
@@ -38,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - ASP.NET Uygulamam</p>
+            <p>&copy; @DateTime.Now.Year - UniPlatform </p>
         </footer>
     </div>
 

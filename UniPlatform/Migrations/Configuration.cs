@@ -37,7 +37,7 @@ namespace UniPlatform.Migrations
             var userStore = new UserStore<ApplicationUser>(db);
             var userManager = new UserManager<ApplicationUser>(userStore);
 
-            var adminUser = userManager.FindByName("admin");
+            var adminUser = userManager.FindByName("admin@a.com");
 
             if (adminUser == null)
             {
