@@ -43,7 +43,7 @@ namespace UniPlatform.Migrations
             {
                 adminUser = new ApplicationUser()
                 {
-                    UserName = "admin",
+                    UserName = "admin@a.com",
                     Email = "admin@a.com"
                 };
                 userManager.Create(adminUser, "Ankara1.");
