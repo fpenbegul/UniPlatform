@@ -155,6 +155,7 @@ namespace UniPlatform.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _ = UserManager.AddToRole(user.Id, "user"); // her kayıt edilen kullanıcı "user" rolünde kayıt altına alınır.
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Hesap onayını ve parola sıfırlamayı etkinleştirme hakkında daha fazla bilgi için lütfen https://go.microsoft.com/fwlink/?LinkID=320771 adresini ziyaret edin.
