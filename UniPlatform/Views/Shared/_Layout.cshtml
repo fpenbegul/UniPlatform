@@ -21,11 +21,15 @@
                 @Html.ActionLink("UniPlatform", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Giriş Sayfası", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Hakkında", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kişi", "Contact", "Home")</li>
-                </ul>
+                @if (User.IsInRole("user"))
+                {
+                    // bu ekle butonlarını sadece user rolündeki kullanıcılar görebilir
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Duyuru Ekle", "Index", "Home")</li>
+                        <li>@Html.ActionLink("İlan Ekle", "About", "Home")</li>
+                        <li>@Html.ActionLink("Soru-Cevap Ekle", "Contact", "Home")</li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
