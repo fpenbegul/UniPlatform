@@ -14,14 +14,14 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     
                     @{
                         foreach (var item in ViewBag.duyurular as ICollection<Duyurular>)
                         {
+
                             
 
-                            @Html.Raw("<a href="+"/Home/DuyuruDetay/"+item.ID+" <tr><th scope = 'row'><span style = 'font-size:11px;' > " + item.DuyuruTarihi.ToLongDateString().Replace(" 2019","").Replace(",","") + " </span ></th ><td > " + item.DuyuruBaslik + "</td ></tr></a>");
+                            @Html.Raw("<tr><th scope = 'row'><span style = 'font-size:11px;'> <a href='/Home/DuyuruDetay/"+item.ID +"'>"+ item.DuyuruTarihi.ToLongDateString().Replace(" 2019","").Replace(",","") + " </a></span ></th ><td > <a href='/Home/DuyuruDetay/"+item.ID +"'>" + item.DuyuruBaslik + "</a></td ></tr>");
                         }
 
                     }
