@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "DuyuruEkle";
+}
+
+<h2>Duyuru Ekle</h2>
+
+
+<div class="row divborder" style="height:100%; ">
+
+    <!--  sol taraf başlangıç -->
+    <div class="col-md-2" style="background-color:rgba(0,0,255,.1); height:500px;" id="menuPanel">
+        <h1 class="lead" style="background-color:rgba(0,0,255,.1);  float:initial; right:0px; left:0px;">Mevcut Duyurular</h1>
+
+        <div class="menu">
+            <ul id="notlarMenu" class="nav nav-pills nav-stacked"></ul>
+        </div>
+    </div>
+    <!--  sol taraf bitiş-->
+    <!--  sağ taraf başlangıç -->
+    <div class="col-md-10 vl" style="background-color:rgba(0,0,0,.2); height:500px;">
+        <div class="input-group form-control" style="margin-top:25px; background-color:rgba(0,0,0,.2);">
+            <input type="text" id="txtBaslik" placeholder="Başlık Giriniz..." class="form-control">
+
+            <div class="form-group green-border-focus" style="margin-top:75px;">
+            </div>
+            <textarea class="form-control" id="txtIcerik" placeholder="İçerik Giriniz..." rows="15" style="resize:none;"></textarea>
+            <div class="buttonContainer">
+                <div class="statusDiv text-success">
+                    <span id="statusMessage"></span>
+                </div>
+            </div>
+        </div>
+        <div class="pull-right">
+
+            <input type="button" id="btnSil" class="btn btn-danger" style="margin-top:10px;" value="Sil" />
+            <input type="button" class="btn btn-success" id="btnKaydet" style="margin-left:10px; margin-top:10px; " value="Kaydet" />
+
+        </div>
+        <!--  sağ taraf bitiş-->
+
+
+    </div>
+
+</div>
+
+<script>
+
+    $("#btnKaydet").click(function () {
+        if ($.trim($("#txtBaslik").val()) == "") {
+            alert("Lütfen başlık giriniz!");
+        }
+        else {
+            $.ajax({
+                method: "post",
+                url: "/api/Duyuru/Save",
+                data: {
+                    DuyuruBaslik: $("#txtBaslik").val(),
+                    Icerik: $("#txtIcerik").val()
+                },
+                success: function (result) {
+                    $("#statusMessage").text(result.mesaj);
+                    $("#statusMessage").fadeIn();
+                    $("#txtBaslik").val("");
+                    $("#txtIcerik").val("");
+                    alert(result);
+
+                    window.location.href = "/Home/Index";
+                },
+                error: function (xhr) {
+                    alert(xhr.status)
+                }
+            });
+
+        }
+    });
+
+</script>
+
+

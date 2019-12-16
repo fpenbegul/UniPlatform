@@ -14,7 +14,7 @@ namespace UniPlatform.Controllers
 
         public ActionResult Index()
         {
-            List<Duyurular> duyurular = db.Duyurular.Where(x => x.OnayliMi == true).Take(10).ToList();
+            List<Duyurular> duyurular = db.Duyurular.Where(x => x.OnayliMi == true).Take(10).OrderByDescending(x => x.ID).ToList();
             ViewBag.duyurular = duyurular;
 
             return View();
@@ -33,5 +33,25 @@ namespace UniPlatform.Controllers
 
             return View();
         }
+
+        [Authorize(Roles = "user")]
+        public ActionResult DuyuruEkle()
+        {
+            return View();
+        }
+
+        public ActionResult DuyuruDetay(int id)
+        {
+
+            Duyurular istenenDuyuru = db.Duyurular.Find(id);
+            if (istenenDuyuru == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(istenenDuyuru);
+        }
+
+
     }
 }

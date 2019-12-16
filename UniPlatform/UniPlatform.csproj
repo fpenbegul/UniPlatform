@@ -257,6 +257,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Duyuru\DuyuruEkle.cshtml" />
+    <Content Include="Views\Home\DuyuruEkle.cshtml" />
+    <Content Include="Views\Home\DuyuruDetay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

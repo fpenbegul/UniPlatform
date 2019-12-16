@@ -4,24 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
+using System.Web.Http.Results;
 using UniPlatform.Models;
 
 namespace UniPlatform.Controllers
 {
     [Authorize(Roles = "user")]
-    public class DuyuruController : Controller
+    public class DuyuruController : ApiController
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Duyuru
-        public ActionResult DuyuruEkle()
+        public HttpResponseMessage DuyuruEkle()
         {
-            return View();
+
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [HttpPost]
-        public JsonResult Save(Duyurular duyuru)
+        public HttpResponseMessage Save(Duyurular duyuru)
         {
             string loogedUserID = User.Identity.GetUserId();
 
@@ -43,7 +44,9 @@ namespace UniPlatform.Controllers
             }
 
 
-            return Json(mesaj);
+            return Request.CreateResponse(mesaj);
         }
+
+
     }
 }
