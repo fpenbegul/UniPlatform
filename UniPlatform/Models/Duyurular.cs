@@ -19,6 +19,8 @@ namespace UniPlatform.Models
 
         [ForeignKey("ApplicationUser")]
         public string DuyuranId { get; set; }
+
         public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual ICollection<DuyuruYorumlar> DuyuruYorumlar { get; set; }
     }
 }

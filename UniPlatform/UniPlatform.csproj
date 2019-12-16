@@ -192,6 +192,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Duyurular.cs" />
+    <Compile Include="Models\DuyuruYorumlar.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ilanlar.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
