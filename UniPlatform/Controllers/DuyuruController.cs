@@ -33,12 +33,12 @@ namespace UniPlatform.Controllers
                 d.DuyruBaslik = duyuru.DuyruBaslik;
                 d.Icerik = duyuru.Icerik;
                 d.DuyuruTarihi = DateTime.Now;
-                d.OnayliMi = false;
+                d.OnayliMi = true;
                 db.Duyurular.Add(d);
                 db.SaveChanges();
 
                 int duyuru_id = d.ID;
-                mesaj = "Eklendi (" + d.DuyuruTarihi.ToLongDateString() + " tarihinde "+d.ID +". id ile kaydedildi!)";
+                mesaj = "Duyuru eklendi!)";
 
             }
 
