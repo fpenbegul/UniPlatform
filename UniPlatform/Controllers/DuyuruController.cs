@@ -30,7 +30,7 @@ namespace UniPlatform.Controllers
             {
                 Duyurular d = new Duyurular();
                 d.DuyuranId = loogedUserID;
-                d.DuyruBaslik = duyuru.DuyruBaslik;
+                d.DuyuruBaslik = duyuru.DuyuruBaslik;
                 d.Icerik = duyuru.Icerik;
                 d.DuyuruTarihi = DateTime.Now;
                 d.OnayliMi = true;
@@ -38,7 +38,7 @@ namespace UniPlatform.Controllers
                 db.SaveChanges();
 
                 int duyuru_id = d.ID;
-                mesaj = "Duyuru eklendi!)";
+                mesaj = "Duyuru eklendi!";
 
             }
 

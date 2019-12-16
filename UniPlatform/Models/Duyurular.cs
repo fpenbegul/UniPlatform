@@ -13,7 +13,7 @@ namespace UniPlatform.Models
         public int ID { get; set; }
         [DataType("datetime2")]
         public DateTime DuyuruTarihi { get; set; }
-        public string DuyruBaslik { get; set; }
+        public string DuyuruBaslik { get; set; }
         public string Icerik { get; set; }
         public bool OnayliMi { get; set; }
 
