@@ -69,9 +69,9 @@ namespace UniPlatform.Controllers
             List<Duyurular> duyurular = new List<Duyurular>();
             //duyurular = db.Duyurular.ToList().ToPagedList(page ?? 1, 2);
 
-            /*db.Duyurular.Where(x => x.ID >= sayfa && x.ID <= sayfa * 10).ToList();*/
+            duyurular = db.Duyurular.OrderByDescending(x => x.ID).ToList();
 
-            return View();
+            return View(duyurular);
         }
 
 

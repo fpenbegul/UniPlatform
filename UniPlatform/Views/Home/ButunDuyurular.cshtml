@@ -1,16 +1,32 @@
 ﻿@model List<UniPlatform.Models.Duyurular>
-@using PagedList
-@using PagedList.Mvc
+
 
 @{
     ViewBag.Title = "ButunDuyurular";
 }
+<div class="row" style="text-align:center; vertical-align:central; margin-top:50px;">
+    <div class="bg-info col-md-12 " style="border-radius:10px;">
+        <div class="col-md-12 ">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th align="center">~BÜTÜN DUYURULAR~</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-<h2>ButunDuyurular</h2>
 
 
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+                    @foreach (var item in Model)
+                    {
+                        string url = "onclick=window.location='" + Url.Action("DuyuruDetay", "Home", new { id = item.ID }) + "';";
+                        @Html.Raw("<tr style='cursor:pointer;' " + url + "><th scope='row'><span style='font-size:11px;'> " + item.DuyuruTarihi.ToLongDateString().Replace(",", "") + " </span></th><td>" + (item.DuyuruBaslik.Length > 45 ? item.DuyuruBaslik.Substring(0, 45) + "..." : item.DuyuruBaslik) + "</td><td>"+item.ApplicationUser.UserName+"</td></tr>");
+                    }
 
 
-
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
