@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UniPlatform.Models;
+using PagedList;
+
 
 namespace UniPlatform.Controllers
 {
@@ -49,8 +52,28 @@ namespace UniPlatform.Controllers
                 return HttpNotFound();
             }
 
+            List<DuyuruYorumlar> yorumlar = db.DuyuruYorumlar.Where(x => x.DuyuruID == id).ToList();
+            ViewBag.Yorumlar = yorumlar;
+
+            string loogedUserID = User.Identity.GetUserId();
+            if (loogedUserID != null)
+            {
+
+                ViewBag.KullaniciAdi = db.Users.Find(loogedUserID).UserName;
+            }
+
             return View(istenenDuyuru);
         }
+        public ActionResult ButunDuyurular(int? page)
+        {
+            List<Duyurular> duyurular = new List<Duyurular>();
+            //duyurular = db.Duyurular.ToList().ToPagedList(page ?? 1, 2);
+
+            /*db.Duyurular.Where(x => x.ID >= sayfa && x.ID <= sayfa * 10).ToList();*/
+
+            return View();
+        }
+
 
 
     }

@@ -15,5 +15,7 @@ namespace UniPlatform.Models
         public int DuyuruID { get; set; }
         public virtual Duyurular Duyurular { get; set; }
         public string YorumIcerik { get; set; }
+        
+        
     }
 }

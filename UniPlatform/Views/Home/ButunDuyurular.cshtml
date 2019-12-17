@@ -1,0 +1,16 @@
+﻿@model List<UniPlatform.Models.Duyurular>
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "ButunDuyurular";
+}
+
+<h2>ButunDuyurular</h2>
+
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+
+
+

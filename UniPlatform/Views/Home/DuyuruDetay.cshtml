@@ -1,4 +1,5 @@
-﻿@model UniPlatform.Models.Duyurular
+﻿@using UniPlatform.Models;
+@model UniPlatform.Models.Duyurular
 
 @{
     ViewBag.Title = "Duyuru Detay";
@@ -19,7 +20,7 @@
     </div>
     <!--  sol taraf bitiş-->
     <!--  sağ taraf başlangıç -->
-    <div class="col-md-10 vl" style="background-color:rgba(0,0,0,.2); height:500px;">
+    <div class="col-md-10 vl" style="background-color:rgba(0,0,0,.2); height:100%;">
         <div class="input-group form-control" style="margin-top:25px; ">
             <h4 style="font-weight:bold;"> @Model.DuyuruBaslik</h4>
             <p> @Model.Icerik</p>
@@ -37,48 +38,58 @@
             <br />
 
         </div>
+
+
+        <div id="yorumlar" style=" margin-top:3%">
+
+            @foreach (var item in ViewBag.Yorumlar as ICollection<DuyuruYorumlar>)
+            {
+                @Html.Raw("<div style='border-radius:50px; padding:10px; background-color:powderblue'>" + item.YorumIcerik + "</div><br>")
+            }
+
+        </div>
         @if (User.IsInRole("user"))
         {
             <div style="margin-top:1%;">
-                <textarea class="form-control" rows="5"></textarea><input type="button" class="btn btn-primary form-control" value="Yorum Ekle" style="height:50px; margin-top:5px;" />
+                <textarea id="txtYorum" class="form-control" rows="5"></textarea><input type="button" id="yorumEkle" class="btn btn-primary form-control" value="Yorum Ekle" style="height:50px; margin-top:5px;" />
             </div>
             <!--  sağ taraf bitiş-->
         }
+        <p style="height:128px;"> </p>
 
-        </div>
+    </div>
 
 </div>
 
 <script>
 
-    $("#btnKaydet").click(function () {
-        if ($.trim($("#txtBaslik").val()) == "") {
-            alert("Lütfen başlık giriniz!");
+    $("#yorumEkle").click(function () {
+        if ($.trim($("#txtYorum").val()) == "") {
+            alert("Lütfen Yorum giriniz!");
         }
         else {
             $.ajax({
                 method: "post",
-                url: "/Duyuru/Save",
+                url: "/api/Duyuru/YorumEkle",
                 data: {
-                    DuyuruBaslik: $("#txtBaslik").val(),
-                    Icerik: $("#txtIcerik").val()
+                    YorumIcerik: $("#txtYorum").val(),
+                    DuyuruID: @Model.ID
                 },
                 success: function (result) {
-                    $("#statusMessage").text(result.mesaj);
-                    $("#statusMessage").fadeIn();
-                    $("#txtBaslik").val("");
-                    $("#txtIcerik").val("");
-                    alert(result);
-
-                    window.location.href = "/Home/Index";
-                },
-                error: function (xhr) {
-                    alert(xhr.status)
+                    YorumEkle($("#txtYorum").val());
+                    $("#txtYorum").val("");
                 }
             });
-
         }
     });
+
+
+    function YorumEkle(yorum) {
+        username = " @ViewBag.KullaniciAdi ";
+        tarih ="@DateTime.Now";
+        $("#yorumlar").append("<div style='border-radius:50px; padding:10px; background-color:powderblue'>" + yorum + "<br> <strong>" + username + "</strong> -" + tarih +"</div><br>");
+        };
+
 
 </script>
 

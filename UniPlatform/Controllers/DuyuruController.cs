@@ -46,6 +46,28 @@ namespace UniPlatform.Controllers
 
             return Request.CreateResponse(mesaj);
         }
+        [HttpPost]
+        public HttpResponseMessage YorumEkle(DuyuruYorumlar gelen_yorum)
+        {
+            string loogedUserID = User.Identity.GetUserId();
+            string kullanici_adi = db.Users.Find(loogedUserID).UserName;
+
+            string mesaj;
+            if (true) // yeni kayıt...
+            {
+                DuyuruYorumlar yorum = new DuyuruYorumlar();
+                yorum.YorumIcerik = gelen_yorum.YorumIcerik + "<br> <strong>" + kullanici_adi + "</strong> -" + DateTime.Now ;
+                yorum.DuyuruID = gelen_yorum.DuyuruID;
+
+                db.DuyuruYorumlar.Add(yorum);
+                db.SaveChanges();
+
+                mesaj = "Duyuru eklendi!";
+            }
+
+
+            return Request.CreateResponse(mesaj);
+        }
 
 
     }

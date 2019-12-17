@@ -60,6 +60,7 @@ namespace UniPlatform.Models
 
         [Display(Name = "Beni anımsa?")]
         public bool RememberMe { get; set; }
+        public object UserName { get; internal set; }
     }
 
     public class RegisterViewModel

@@ -86,6 +86,11 @@ namespace UniPlatform
             }
             return manager;
         }
+
+        internal Task FindAsync(object userName, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     // Uygulamada kullanılan uygulama oturum açma yöneticisini yapılandırın.
