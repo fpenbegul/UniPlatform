@@ -37,13 +37,15 @@
             <br />
 
         </div>
-        <div style="margin-top:1%;">
-            <textarea class="form-control" rows="5" ></textarea><input type="button" class="btn btn-primary form-control" value="Yorum Ekle" style="height:50px; margin-top:5px;"/>
+        @if (User.IsInRole("user"))
+        {
+            <div style="margin-top:1%;">
+                <textarea class="form-control" rows="5"></textarea><input type="button" class="btn btn-primary form-control" value="Yorum Ekle" style="height:50px; margin-top:5px;" />
+            </div>
+            <!--  sağ taraf bitiş-->
+        }
+
         </div>
-        <!--  sağ taraf bitiş-->
-
-
-    </div>
 
 </div>
 
