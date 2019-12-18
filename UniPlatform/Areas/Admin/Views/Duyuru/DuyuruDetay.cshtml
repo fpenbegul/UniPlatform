@@ -1,0 +1,114 @@
+﻿@using UniPlatform.Models;
+@model UniPlatform.Models.Duyurular
+
+@{
+    ViewBag.Title = "Duyuru Detay";
+}
+
+
+
+
+<div class="row divborder" style="height:100%; ">
+
+    <!--  sol taraf başlangıç -->
+    <div class="col-md-2" style="background-color:rgba(0,0,255,.1); height:500px;" id="menuPanel">
+        <h1 class="lead" style="background-color:rgba(0,0,255,.1);  float:initial; right:0px; left:0px;">Mevcut Duyurular</h1>
+
+        <div class="menu">
+            <ul id="notlarMenu" class="nav nav-pills nav-stacked"></ul>
+        </div>
+    </div>
+    <!--  sol taraf bitiş-->
+    <!--  sağ taraf başlangıç -->
+    <div class="col-md-10 vl" style="background-color:rgba(0,0,0,.2); height:100%;">
+        <div class="input-group form-control" style="margin-top:25px; ">
+            @*<input type="text" id="txtBaslik" contenteditable="true" style="font-weight:bold;">  </input>*@
+            <input type="text" id="txtBaslik" class="form-control" style="font-weight:bold;" value="@Model.DuyuruBaslik" /><br />
+            <textarea id="txtIcerik" class="form-control" rows="15" style="font-weight:bold; margin-top:10px;" value="">@Model.Icerik
+            </textarea>
+
+            @*<p id="txtIcerik" contenteditable="true"> @Model.Icerik</p>*@
+            <div class="form-group green-border-focus" style="margin-top:75px;">
+            </div>
+            <div>
+                <input type="checkbox" id="chkOnay" @(Model.OnayliMi ? "checked" : "unchecked")>
+                <label for="subscribeNews">Konu Onayli Mi?</label>
+            </div>
+            <input type="button" class="btn btn-success btn-lg pull-right" id="btnKaydet" style="margin-left:10px; margin-top:10px; " value="Güncelle" />
+            <div class="buttonContainer">
+                <div class="statusDiv text-success">
+                    <span id="statusMessage"></span>
+                </div>
+            </div>
+        </div>
+        <div class="pull-right">
+
+            @Model.ApplicationUser.UserName - @Model.DuyuruTarihi
+            <br />
+
+        </div>
+
+
+        <div id="yorumlar" style=" margin-top:3%">
+
+            @foreach (var item in ViewBag.Yorumlar as ICollection<DuyuruYorumlar>)
+            {
+                @Html.Raw("<div style='border-radius:50px; padding:10px; background-color:powderblue'>" + item.YorumIcerik + "</div><br>")
+            }
+
+        </div>
+        @if (User.IsInRole("user"))
+        {
+            <div style="margin-top:1%;">
+                <textarea id="txtYorum" class="form-control" rows="5"></textarea><input type="button" id="yorumEkle" class="btn btn-primary form-control" value="Yorum Ekle" style="height:50px; margin-top:5px;" />
+            </div>
+            <!--  sağ taraf bitiş-->
+        }
+        <p style="height:128px;"> </p>
+
+    </div>
+
+</div>
+
+<script>
+    
+    $("#btnKaydet").click(function () {
+        if ($.trim($("#txtBaslik").val()) == "") {
+            alert("Lütfen başlık giriniz!");
+            alert($("#txtBaslik").val());
+        }
+        else {
+            $.ajax({
+                method: "post",
+                url: "/api/Duyuru/Save",
+                data: {
+                    DuyuruBaslik: $("#txtBaslik").val(),
+                    Icerik: $("#txtIcerik").val()
+                },
+                success: function (result) {
+                    $("#statusMessage").text(result.mesaj);
+                    $("#statusMessage").fadeIn();
+                    $("#txtBaslik").val("");
+                    $("#txtIcerik").val("");
+                    alert(result);
+
+                    window.location.href = "/Home/Index";
+                },
+                error: function (xhr) {
+                    alert(xhr.status)
+                }
+            });
+
+        }
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
