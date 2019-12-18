@@ -45,14 +45,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row"><span style="font-size:13px;"> 7 Aralık</span></th>
-                        <td>Satılık Kitap</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">6 Aralık</th>
-                        <td>Satılık Cetvel</td>
-                    </tr>
+
+                    @{
+                        foreach (var item in ViewBag.ilanlar as ICollection<Ilanlar>)
+                        {
+
+                            string url = "onclick=window.location='" + Url.Action("IlanDetay", "Home", new { id = item.ID }) + "';";
+
+                            @Html.Raw("<tr style='cursor:pointer;' " + url + "><th scope = 'row'><span style = 'font-size:11px;'> " + item.IlanTarihi.ToLongDateString().Replace(" 2019", "").Replace(",", "") + " </span ></th ><td >" + (item.IlanBaslik.Length > 30 ? item.IlanBaslik.Substring(0, 25) + "..." : item.IlanBaslik) + "</td ></tr>");
+                        }
+
+                    }
                 </tbody>
                 <tfoot>
 
@@ -73,14 +76,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row"><span style="font-size:13px;"> 7 Aralık</span></th>
-                        <td>Sınav Soruları</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">6 Aralık</th>
-                        <td>Çıkmış Sorular</td>
-                    </tr>
+
+                    @{
+                        foreach (var item in ViewBag.duyurular as ICollection<Duyurular>)
+                        {
+
+                            string url = "onclick=window.location='" + Url.Action("DuyuruDetay", "Home", new { id = item.ID }) + "';";
+
+                            @Html.Raw("<tr style='cursor:pointer;' " + url + "><th scope = 'row'><span style = 'font-size:11px;'> " + item.DuyuruTarihi.ToLongDateString().Replace(" 2019", "").Replace(",", "") + " </span ></th ><td >" + (item.DuyuruBaslik.Length > 30 ? item.DuyuruBaslik.Substring(0, 25) + "..." : item.DuyuruBaslik) + "</td ></tr>");
+                        }
+
+                    }
                 </tbody>
                 <tfoot>
 

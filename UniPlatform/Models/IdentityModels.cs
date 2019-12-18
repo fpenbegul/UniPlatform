@@ -29,6 +29,7 @@ namespace UniPlatform.Models
         public DbSet<Ilanlar> Ilanlar { get; set; }
         public DbSet<Duyurular> Duyurular { get; set; }
         public DbSet<DuyuruYorumlar> DuyuruYorumlar { get; set; }
+        public DbSet<IlanYorumlar> IlanYorumlar { get; set; }
 
 
         public static ApplicationDbContext Create()

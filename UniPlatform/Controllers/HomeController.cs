@@ -18,15 +18,16 @@ namespace UniPlatform.Controllers
         public ActionResult Index()
         {
             List<Duyurular> duyurular = db.Duyurular.Where(x => x.OnayliMi == true).Take(10).OrderByDescending(x => x.ID).ToList();
+            List<Ilanlar> ilanlar = db.Ilanlar.Where(x => x.OnayliMi == true).Take(10).OrderByDescending(x => x.ID).ToList();
+            
             ViewBag.duyurular = duyurular;
+            ViewBag.ilanlar = ilanlar;
 
             return View();
         }
-
-        public ActionResult About()
+        [Authorize(Roles = "user")]
+        public ActionResult IlanEkle()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
@@ -72,6 +73,27 @@ namespace UniPlatform.Controllers
             duyurular = db.Duyurular.OrderByDescending(x => x.ID).ToList();
 
             return View(duyurular);
+        }
+        
+        public ActionResult IlanDetay(int id)
+        {
+
+            Ilanlar istenenIlan = db.Ilanlar.Find(id);
+            if (istenenIlan == null)
+            {
+                return HttpNotFound();
+            }
+
+            List<IlanYorumlar> yorumlar = db.IlanYorumlar.Where(x => x.IlanID == id).ToList();
+            ViewBag.Yorumlar = yorumlar;
+
+            string loogedUserID = User.Identity.GetUserId();
+            if (loogedUserID != null)
+            {
+                ViewBag.KullaniciAdi = db.Users.Find(loogedUserID).UserName;
+            }
+
+            return View(istenenIlan);
         }
 
 

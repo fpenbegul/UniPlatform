@@ -1,16 +1,14 @@
-﻿
-@{
-    ViewBag.Title = "DuyuruEkle";
+﻿@{
+    ViewBag.Title = "IlanEkle";
 }
-
-<h2>Duyuru Ekle</h2>
+<h2>IlanEkle</h2>
 
 
 <div class="row divborder" style="height:100%; ">
 
     <!--  sol taraf başlangıç -->
     <div class="col-md-2" style="background-color:rgba(0,0,255,.1); height:500px;" id="menuPanel">
-        <h1 class="lead" style="background-color:rgba(0,0,255,.1);  float:initial; right:0px; left:0px;">Mevcut Duyurular</h1>
+        <h1 class="lead" style="background-color:rgba(0,0,255,.1);  float:initial; right:0px; left:0px;">Mevcut İlanlar</h1>
 
         <div class="menu">
             <ul id="notlarMenu" class="nav nav-pills nav-stacked"></ul>
@@ -53,7 +51,7 @@
         else {
             $.ajax({
                 method: "post",
-                url: "/api/Duyuru/Save",
+                url: "/api/Ilan/Save",
                 data: {
                     DuyuruBaslik: $("#txtBaslik").val(),
                     Icerik: $("#txtIcerik").val()
