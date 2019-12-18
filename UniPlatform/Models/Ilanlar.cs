@@ -23,6 +23,6 @@ namespace UniPlatform.Models
         [ForeignKey("ApplicationUser")]
         public string IlanSahibiId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
-
+        public virtual ICollection<IlanYorumlar> IlanYorumlar { get; set; }
     }
 }

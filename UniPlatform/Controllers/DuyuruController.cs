@@ -27,8 +27,7 @@ namespace UniPlatform.Controllers
             string loogedUserID = User.Identity.GetUserId();
 
             string mesaj;
-            if (true) // yeni kayıt...
-            {
+            
                 Duyurular d = new Duyurular();
                 d.DuyuranId = loogedUserID;
                 d.DuyuruBaslik = duyuru.DuyuruBaslik;
@@ -41,9 +40,6 @@ namespace UniPlatform.Controllers
                 int duyuru_id = d.ID;
                 mesaj = "Duyuru eklendi!";
 
-            }
-
-
             return Request.CreateResponse(mesaj);
         }
         [HttpPost]
@@ -53,8 +49,7 @@ namespace UniPlatform.Controllers
             string kullanici_adi = db.Users.Find(loogedUserID).UserName;
 
             string mesaj;
-            if (true) // yeni kayıt...
-            {
+
                 DuyuruYorumlar yorum = new DuyuruYorumlar();
                 yorum.YorumIcerik = gelen_yorum.YorumIcerik + "<br> <strong>" + kullanici_adi + "</strong> -" + DateTime.Now ;
                 yorum.DuyuruID = gelen_yorum.DuyuruID;
@@ -63,7 +58,6 @@ namespace UniPlatform.Controllers
                 db.SaveChanges();
 
                 mesaj = "Duyuru eklendi!";
-            }
 
 
             return Request.CreateResponse(mesaj);

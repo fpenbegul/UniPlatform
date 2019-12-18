@@ -10,7 +10,6 @@ namespace UniPlatform.Models
     public class Duyurular
     {
         [Key]
-
         public int ID { get; set; }
         [DataType("datetime2")]
         public DateTime DuyuruTarihi { get; set; }

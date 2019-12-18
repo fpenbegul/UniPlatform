@@ -7,14 +7,13 @@ using System.Web;
 
 namespace UniPlatform.Models
 {
-    public class DuyuruYorumlar
+    public class IlanYorumlar
     {
         [Key]
         public int YorumID { get; set; }
-        [ForeignKey("Duyurular")]
-        public int DuyuruID { get; set; }
-        public virtual Duyurular Duyurular { get; set; }
+        [ForeignKey("Ilanlar")]
+        public int IlanID { get; set; }
+        public virtual Ilanlar Ilanlar { get; set; }
         public string YorumIcerik { get; set; }
-        
     }
 }
